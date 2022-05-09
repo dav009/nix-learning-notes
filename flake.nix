@@ -1,31 +1,29 @@
 {
-  description = "Description of your project goes here.";
-  inputs = {
-    stable.url = "github:NixOS/nixpkgs/nixos-20.03";
-    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-  };
-  outputs = inputs:
-    let
-      lib = inputs.stable.lib;
-      system = "x86_64-darwin";
-      unstable-pkgs = inputs.unstable.legacyPackages.${system};
-      pkgs = inputs.stable.legacyPackages.${system};
-      runtimeDeps = with pkgs; [ ]; # Any system packages goes here
-      config = { projectDir = ./.; };
-      app = unstable-pkgs.poetry2nix.mkPoetryApplication config // {
-        propagatedBuildInputs = runtimeDeps;
-      };
-      # env = app.dependencyEnv;
-      env = pkgs.poetry2nix.mkPoetryEnv config;
-    in {
-      devShell."${system}" = pkgs.mkShell {
-        buildInputs = with pkgs;
-          [ poetry ] ++ runtimeDeps
-          ++ (if (builtins.pathExists ./poetry.lock) then [ env ] else [ ]);
-        shellHook = ''
-          cat README
-        '';
-      };
-      defaultPackage."${system}" = app;
+  description = "A simple script";
+
+    inputs ={
+        tennis-data = {
+            url="github:JeffSackmann/tennis_atp";
+            flake=false;
+        };
     };
+    
+    outputs = { self, tennis-data, nixpkgs }: {
+    defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.my-script;
+
+    packages.x86_64-darwin.my-script =
+      let
+        pkgs = import nixpkgs { system = "x86_64-darwin"; };
+      in
+      pkgs.writeShellScriptBin "my-script" ''
+      cat ${tennis-data}/README.md
+          '';
+
+      devShell.x86_64-darwin =
+      let
+        pkgs = import nixpkgs { system = "x86_64-darwin"; };
+      in pkgs.mkShell {
+        buildInputs = with pkgs; [ go-tools  ];
+      };
+  };
 }
