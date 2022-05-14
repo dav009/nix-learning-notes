@@ -126,8 +126,8 @@ adding a dataset from github:
 - `nix build github:Xe/gohello`
 - `nix run github:Xe/gohello/main`
 
---
-References:
+## References:
+- Hermetic builds with Bob:  https://github.com/benchkram/bob
 - https://christine.website/blog/nix-flakes-1-2022-02-21
 - walkthrough poetry and nix develop https://www.youtube.com/watch?v=irPTtmP4xuM
 - https://github.com/Xe/gohello/fork
