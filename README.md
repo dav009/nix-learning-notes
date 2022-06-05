@@ -121,10 +121,18 @@ adding a dataset from github:
 
 - Cachix: https://www.cachix.org/
 
+# building docker image with nixos
+
+```
+/nix/var/nix/profiles/default/bin/nix-build hello-docker.nix
+```
+
 ## miscs
 
 - `nix build github:Xe/gohello`
 - `nix run github:Xe/gohello/main`
+
+
 
 ## References:
 - Hermetic builds with Bob:  https://github.com/benchkram/bob
@@ -134,3 +142,4 @@ adding a dataset from github:
 - On nix store, graph and derivation concepts https://shopify.engineering/what-is-nix
 - video on how shopify uses nix: https://engineering.shopify.com/blogs/engineering/shipit-presents-how-shopify-uses-nix
 - reproduceable datasciene with nix https://josephsdavid.github.io/nix.html
+- highly reproduceable python environments with nix https://github.com/DavHau/mach-nix
