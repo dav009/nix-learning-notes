@@ -2,6 +2,17 @@
 
 Just some personal notes on studying and tinkering with nix package manager.
 
+# Where to start first?
+
+My advice is first to go through the two sources below
+
+- https://christine.website/blog/nix-flakes-1-2022-02-21
+- https://www.youtube.com/watch?v=1dzgVkgQ5mE
+
+Once you understand the big picture, the [Nix Pills](https://nixos.org/guides/nix-pills/) are the way to understand the details
+
+
+
 # install nix
 
 ```bash
